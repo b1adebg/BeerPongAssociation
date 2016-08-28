@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace BeerPongAssociation.Models
 {
@@ -11,6 +9,7 @@ namespace BeerPongAssociation.Models
         public News()
         {
             this.Date = DateTime.Now;
+            this.Tags = new HashSet<Tag>();
         }
 
         [Key]
@@ -26,7 +25,6 @@ namespace BeerPongAssociation.Models
         [Required]
         public DateTime Date { get; set; }
 
-        [Required]
-        public IEnumerable<Tag> Tags { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }

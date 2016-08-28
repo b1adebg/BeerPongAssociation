@@ -74,7 +74,7 @@ namespace BeerPongAssociation.Models
         public string FullName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = DefaultValues.passwordLenght)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = DefaultValues.PasswordLenght)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -93,7 +93,7 @@ namespace BeerPongAssociation.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = DefaultValues.passwordLenght)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = DefaultValues.PasswordLenght)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

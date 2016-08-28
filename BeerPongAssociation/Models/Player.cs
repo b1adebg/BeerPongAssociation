@@ -8,6 +8,11 @@ namespace BeerPongAssociation.Models
 {
     public class Player
     {
+        public Player()
+        {
+            this.TournamentsPlayed = new HashSet<Tournament>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -41,8 +46,10 @@ namespace BeerPongAssociation.Models
 
         public int Popularity { get; set; }
 
-        public ApplicationUser UserAccount { get; set; }
-
         public string PicturePath { get; set; }
+
+        public virtual ApplicationUser UserAccount { get; set; }
+        
+        public virtual ICollection<Tournament> TournamentsPlayed { get; set; }
     }
 }

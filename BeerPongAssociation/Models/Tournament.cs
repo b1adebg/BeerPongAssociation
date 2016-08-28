@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace BeerPongAssociation.Models
 {
     public class Tournament
     {
+        public Tournament()
+        {
+            this.Participants = new HashSet<Player>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -25,7 +28,7 @@ namespace BeerPongAssociation.Models
         [StringLength(100)]
         public string Location { get; set; }
 
-        public IEnumerable<Player> Participants { get; set; }
+        public virtual ICollection<Player> Participants { get; set; }
 
 
 

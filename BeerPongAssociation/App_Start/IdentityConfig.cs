@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using BeerPongAssociation.Models;
+using BeerPongAssociation.MiscClasses;
 
 namespace BeerPongAssociation
 {
@@ -53,7 +54,7 @@ namespace BeerPongAssociation
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 8,
+                RequiredLength = DefaultValues.PasswordLenght,
                 RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = false,

@@ -14,6 +14,10 @@ namespace BeerPongAssociation.Models
 
         public DbSet<Tournament> Tournaments { get; set; }
 
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<News> SiteNews { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

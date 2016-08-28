@@ -7,6 +7,6 @@ namespace BeerPongAssociation.MiscClasses
 {
     public static class DefaultValues
     {
-       public const int passwordLenght = 3;
+       public const int PasswordLenght = 3;
     }
 }
