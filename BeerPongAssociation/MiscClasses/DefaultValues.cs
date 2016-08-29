@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BeerPongAssociation.MiscClasses
 {
-    public static class DefaultValues
+    public class DefaultValues
     {
        public const int PasswordLenght = 3;
     }

@@ -8,6 +8,11 @@ namespace BeerPongAssociation.Models
 {
     public class Comment
     {
+        public Comment()
+        {
+            this.Date = DateTime.Now;
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -16,6 +21,9 @@ namespace BeerPongAssociation.Models
 
         [Required]
         public News NewsCommented { get; set; }
+
+        [Required]
+        public DateTime Date { get; set; }
 
         public ApplicationUser Author { get; set; }
 

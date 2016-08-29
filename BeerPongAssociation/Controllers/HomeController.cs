@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeerPongAssociation.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,13 @@ namespace BeerPongAssociation.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
-            return View();
+            var db = ApplicationDbContext.Create();
+            var news = db.SiteNews.OrderByDescending(n => n.Date).Take(4);
+
+            return View(news.ToList());
         }
 
         public ActionResult About()

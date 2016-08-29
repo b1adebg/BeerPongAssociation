@@ -26,5 +26,8 @@ namespace BeerPongAssociation.Models
         public DateTime Date { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
+
     }
 }
