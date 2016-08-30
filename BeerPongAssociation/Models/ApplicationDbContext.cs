@@ -30,5 +30,7 @@ namespace BeerPongAssociation.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<BeerPongAssociation.Models.Article> Articles { get; set; }
     }
 }

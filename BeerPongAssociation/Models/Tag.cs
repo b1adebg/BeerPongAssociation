@@ -8,6 +8,7 @@ namespace BeerPongAssociation.Models
         public Tag()
         {
             this.NewsTagged = new HashSet<News>();
+            this.ArticlesTagged = new HashSet<Article>();
         }
 
         [Key]
@@ -17,5 +18,8 @@ namespace BeerPongAssociation.Models
         public string Name { get; set; }
 
         public virtual ICollection<News> NewsTagged { get; set; }
+
+        public virtual ICollection<Article> ArticlesTagged { get; set; }
+
     }
 }

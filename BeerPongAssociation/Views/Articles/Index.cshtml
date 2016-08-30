@@ -1,0 +1,29 @@
+﻿@using BeerPongAssociation.MiscClasses;
+
+@model IEnumerable<BeerPongAssociation.Models.Article>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Latest articles</h2>
+
+<p>
+    @Html.ActionLink("Browse articles", "Browse")
+</p>
+<section class="row">
+    @foreach (var article in Model)
+    {
+        <article class="col-md-6">
+            <h2><a href="@Url.Action("Details", "Articles", new { id = article.Id })">@article.Title</a></h2>
+            <p>@TextManipulation.ShortenText(article.Body)</p>
+            <div>
+                posted @article.Date.ToShortDateString()
+                @if (article.Tags.Count > 0)
+                {
+                    <i> in @string.Join(" ,", article.Tags.Select(t => t.Name).ToList())</i>
+                }
+            </div>
+        </article>
+    }
+</section>
