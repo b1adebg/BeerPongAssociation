@@ -1,125 +1,121 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using BeerPongAssociation.Models;
 
 namespace BeerPongAssociation.Controllers
 {
-    public class NewsController : Controller
+    public class TournamentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: News
+        // GET: Tournaments
         public ActionResult Index()
         {
-            var news = db.SiteNews.OrderByDescending(n => n.Date);
-            return View(news.Include(n => n.Tags).ToList());
+            return View(db.Tournaments.ToList());
         }
 
         public ActionResult Browse()
         {
-            var news = db.SiteNews.OrderByDescending(n => n.Date);
-            return View(news.ToList());
+            return View(db.Tournaments.ToList());
         }
 
-        // GET: News/Details/5
+        // GET: Tournaments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = db.SiteNews.Find(id);
-            if (news == null)
+            Tournament tournament = db.Tournaments.Find(id);
+            if (tournament == null)
             {
                 return HttpNotFound();
             }
-            return View(news);
+            return View(tournament);
         }
 
-        // GET: News/Create
-        [Authorize(Roles = "Administrators")]
+        // GET: Tournaments/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: News/Create
+        // POST: Tournaments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Body,Date")] News news)
+        public ActionResult Create([Bind(Include = "Id,Name,StartDate,EndDate,Location")] Tournament tournament)
         {
             if (ModelState.IsValid)
             {
-                db.SiteNews.Add(news);
+                db.Tournaments.Add(tournament);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(news);
+            return View(tournament);
         }
 
-        // GET: News/Edit/5
-        [Authorize(Roles = "Administrators")]
+        // GET: Tournaments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = db.SiteNews.Find(id);
-            if (news == null)
+            Tournament tournament = db.Tournaments.Find(id);
+            if (tournament == null)
             {
                 return HttpNotFound();
             }
-            return View(news);
+            return View(tournament);
         }
 
-        // POST: News/Edit/5
+        // POST: Tournaments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Body")] News news)
+        public ActionResult Edit([Bind(Include = "Id,Name,StartDate,EndDate,Location")] Tournament tournament)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(news).State = EntityState.Modified;
+                db.Entry(tournament).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(news);
+            return View(tournament);
         }
 
-        // GET: News/Delete/5
-        [Authorize(Roles = "Administrators")]
+        // GET: Tournaments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = db.SiteNews.Find(id);
-            if (news == null)
+            Tournament tournament = db.Tournaments.Find(id);
+            if (tournament == null)
             {
                 return HttpNotFound();
             }
-            return View(news);
+            return View(tournament);
         }
 
-        // POST: News/Delete/5
+        // POST: Tournaments/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            News news = db.SiteNews.Find(id);
-            db.SiteNews.Remove(news);
+            Tournament tournament = db.Tournaments.Find(id);
+            db.Tournaments.Remove(tournament);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

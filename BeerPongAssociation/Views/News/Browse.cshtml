@@ -1,10 +1,12 @@
-﻿@model IEnumerable<BeerPongAssociation.Models.News>
+﻿@using BeerPongAssociation.MiscClasses;
+
+@model IEnumerable<BeerPongAssociation.Models.News>
 
 @{
-    ViewBag.Title = "Start";
+    ViewBag.Title = "Browse";
 }
 
-<h2>Check out the latest news from the beer pong world</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,8 +20,15 @@
             @Html.DisplayNameFor(model => model.Body)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            Last comment
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Date)
         </th>
+        
         <th></th>
     </tr>
 
@@ -29,7 +38,16 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Body)
+            @TextManipulation.ShortenText(item.Body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments.Count)
+        </td>
+        <td>
+            @if (item.Comments.Count > 0)
+            {
+                var date = item.Comments.OrderByDescending(c => c.Date).First().Date;
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date)

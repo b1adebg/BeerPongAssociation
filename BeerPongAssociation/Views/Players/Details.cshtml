@@ -1,0 +1,114 @@
+﻿@model BeerPongAssociation.Models.Player
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Player</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NickName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NickName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerClass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerClass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeftHandPrecision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeftHandPrecision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RightHandPrecision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RightHandPrecision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stamina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stamina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mentality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mentality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BestResult)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BestResult)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfessionalCareer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfessionalCareer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonalIfno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonalIfno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Popularity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Popularity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PicturePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PicturePath)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

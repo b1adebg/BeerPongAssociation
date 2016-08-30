@@ -19,9 +19,9 @@
     @foreach (var news in Model)
     {
         <article class="col-md-6">
-            <h2>@news.Title</h2>
+            <h2><a href="@Url.Action("Details", "News", new { id = news.Id })">@news.Title</a></h2>
             <p>@TextManipulation.ShortenText(news.Body, 50)</p>
-            <div>@news.Date.ToString("dd/MM/yyyy") 
+            <div>posted @news.Date.ToString("dd/MM/yyyy") 
             @if (news.Tags.Count > 0)
             {
                 <i> in @string.Join(" ,", news.Tags.Select(t => t.Name).ToList())</i>

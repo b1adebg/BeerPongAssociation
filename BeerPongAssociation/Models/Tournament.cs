@@ -28,6 +28,9 @@ namespace BeerPongAssociation.Models
         [StringLength(100)]
         public string Location { get; set; }
 
+        [Required]
+        public string Description { get; set; }
+
         public virtual ICollection<Player> Participants { get; set; }
 
 

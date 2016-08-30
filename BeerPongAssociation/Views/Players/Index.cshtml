@@ -1,0 +1,43 @@
+﻿@using BeerPongAssociation.MiscClasses;
+
+@model IEnumerable<BeerPongAssociation.Models.Player>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Browse players", "Browse")
+</p>
+<section class="row">
+    <h2>Popular players</h2>
+    @foreach (var player in Model.OrderByDescending(p => p.Popularity).Take(3))
+    {
+        <article class="col-md-4">
+                <h2>
+                    <a href="@Url.Action("Details", "Players", new { id = player.Id })">@player.FullName - @player.NickName</a>
+                </h2>
+                <h3>@player.PlayerClass</h3>
+                <div>
+                    <img style="float:left; margin:5px" src="~/Resources/PlayerPics/MitakaPic1.png" />
+                    @TextManipulation.ShortenText(player.ProfessionalCareer)
+                </div>
+        </article>
+    }
+</section>
+<section class="row">
+    <h2>Players database</h2>
+    @foreach (var player in Model.OrderBy(p => p.FullName))
+    {
+        <article class="col-md-4">
+            <h2>
+                <a href="@Url.Action("Details", "Players", new { id = player.Id })">@player.FullName - @player.NickName</a>
+            </h2>
+            <h3>@player.PlayerClass</h3>
+            <div>
+            <img style="float:left; margin:5px" src="~/Resources/PlayerPics/MitakaPic1.png" />
+            @TextManipulation.ShortenText(player.ProfessionalCareer)
+            </div>
+        </article>
+    }
+</section>

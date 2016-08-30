@@ -1,0 +1,99 @@
+﻿@model IEnumerable<BeerPongAssociation.Models.Player>
+
+@{
+    ViewBag.Title = "Browse";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NickName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerClass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeftHandPrecision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RightHandPrecision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stamina)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mentality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BestResult)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfessionalCareer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonalIfno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Popularity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PicturePath)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NickName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlayerClass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeftHandPrecision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RightHandPrecision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stamina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mentality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BestResult)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfessionalCareer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonalIfno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Popularity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PicturePath)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
