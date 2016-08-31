@@ -185,6 +185,7 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\Player.cs" />
@@ -275,7 +276,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resources\PlayerPics\" />
+    <Folder Include="Resources\Images\PlayerPics\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -7,6 +7,8 @@ namespace BeerPongAssociation.MiscClasses
 {
     public class DefaultValues
     {
-       public const int PasswordLenght = 3;
+        public const int PasswordLenght = 3;
+
+        public const string PlayersPicsPath = "Resources/Images/PlayerPics/";
     }
 }

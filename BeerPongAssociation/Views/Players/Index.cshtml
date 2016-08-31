@@ -13,15 +13,18 @@
     <h2>Popular players</h2>
     @foreach (var player in Model.OrderByDescending(p => p.Popularity).Take(3))
     {
-        <article class="col-md-4">
-                <h2>
-                    <a href="@Url.Action("Details", "Players", new { id = player.Id })">@player.FullName - @player.NickName</a>
-                </h2>
-                <h3>@player.PlayerClass</h3>
-                <div>
-                    <img style="float:left; margin:5px" src="~/Resources/PlayerPics/MitakaPic1.png" />
-                    @TextManipulation.ShortenText(player.ProfessionalCareer)
-                </div>
+        string path = DefaultValues.PlayersPicsPath + player.PicturePath;
+        <article style="padding-right:0px" class="col-md-4">
+            <div class="player">
+                <img style="float:left; margin-right:10px;" src="@path" />
+                
+                <a href="@Url.Action("Details", "Players", new { id = player.Id })">
+                    <h2 style="margin:0px">@player.FullName</h2>
+                    <h2 style="margin:0px">"@player.NickName"</h2>
+                </a>
+                <h4>@player.PlayerClass</h4>
+                <p style="overflow:hidden">@TextManipulation.ShortenText(player.ProfessionalCareer)</p>
+            </div>
         </article>
     }
 </section>
@@ -29,14 +32,17 @@
     <h2>Players database</h2>
     @foreach (var player in Model.OrderBy(p => p.FullName))
     {
-        <article class="col-md-4">
-            <h2>
-                <a href="@Url.Action("Details", "Players", new { id = player.Id })">@player.FullName - @player.NickName</a>
-            </h2>
-            <h3>@player.PlayerClass</h3>
-            <div>
-            <img style="float:left; margin:5px" src="~/Resources/PlayerPics/MitakaPic1.png" />
-            @TextManipulation.ShortenText(player.ProfessionalCareer)
+        string path = DefaultValues.PlayersPicsPath + player.PicturePath;
+        <article style="padding-right:0px" class="col-md-4">
+            <div class="player">
+                <img style="float:left; margin-right:10px;" src="@path" />
+
+                <a href="@Url.Action("Details", "Players", new { id = player.Id })">
+                    <h2 style="margin:0px">@player.FullName</h2>
+                    <h2 style="margin:0px">"@player.NickName"</h2>
+                </a>
+                <h4>@player.PlayerClass</h4>
+                <p style="overflow:hidden">@TextManipulation.ShortenText(player.ProfessionalCareer)</p>
             </div>
         </article>
     }

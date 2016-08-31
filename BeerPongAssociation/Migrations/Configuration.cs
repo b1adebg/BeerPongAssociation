@@ -154,7 +154,7 @@ namespace BeerPongAssociation.Migrations
                 throw new Exception(string.Join("; ", addAdminRoleResult.Errors));
             }
         }
-        /*
+       /*
         private void CreatePost(ApplicationDbContext context,
             string title, string body, DateTime date, string authorUsername)
         {

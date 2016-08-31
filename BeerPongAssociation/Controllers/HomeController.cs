@@ -12,10 +12,21 @@ namespace BeerPongAssociation.Controllers
 
         public ActionResult Index()
         {
-            var db = ApplicationDbContext.Create();
-            var news = db.SiteNews.OrderByDescending(n => n.Date).Take(4);
+            var db = new ApplicationDbContext();
+            var welcome = new WelcomeViewModel();
+            welcome.LatestNews = db.SiteNews.OrderByDescending(n => n.Date).Take(4).ToList();
+            welcome.FeaturedPlayer = db.Players.OrderByDescending(p => p.Popularity).FirstOrDefault();
+            welcome.LastArticle = db.Articles.OrderByDescending(a => a.Date).FirstOrDefault();
+            if (!db.Tournaments.Any(t => (t.StartDate < DateTime.Now && t.EndDate > DateTime.Now)))
+            {
+                welcome.FeaturedTournament = db.Tournaments.Where(t => t.EndDate < DateTime.Now).OrderByDescending(t => t.EndDate).FirstOrDefault();
+            }
+            else
+            {
+                welcome.FeaturedTournament = db.Tournaments.Where(t => (t.StartDate < DateTime.Now && t.EndDate > DateTime.Now)).FirstOrDefault();
+            }
 
-            return View(news.ToList());
+            return View(welcome);
         }
 
         public ActionResult About()

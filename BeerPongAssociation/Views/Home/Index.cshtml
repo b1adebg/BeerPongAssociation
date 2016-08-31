@@ -2,32 +2,73 @@
     ViewBag.Title = "Home Page";
 }
 
-@using BeerPongAssociation.Models
 @using BeerPongAssociation.MiscClasses;
 
-@model List<News>
+@model BeerPongAssociation.Models.WelcomeViewModel
 
-<section class="row">
-    <article class="welcome col-md-12">
-        <h2>Welcome to the official Bulgarian Beer Pong Association website</h2>
-        <p>
-            The ultimate source for everything "beer pong" in Bulgaria and around the world. Get the latest news in the sport, tournament results, league standings and more!
-        </p>
+<section class="row welcome">
+    <article class="col-md-12">
+        <div>
+            <img style="float:left; margin-right:10px; margin-left:0px; border-radius:15px;" src="~/Resources/Images/Logo.png" />
+            <h2 style="margin:0px; text-align:center">Welcome to the official Bulgarian Beer Pong Association website !!!</h2>
+            <p style="margin-bottom:5px"></p>
+            <h4 style="margin:0px">
+                The ultimate source for everything "beer pong" in Bulgaria and around the world. Get the latest news in the sport, tournament results, league standings and more!
+            </h4>
+        </div>
     </article>
 </section>
 <section class="row">
-    @foreach (var news in Model)
-    {
-        <article class="col-md-6">
-            <h2><a href="@Url.Action("Details", "News", new { id = news.Id })">@news.Title</a></h2>
-            <p>@TextManipulation.ShortenText(news.Body, 50)</p>
-            <div>posted @news.Date.ToShortDateString()
-            @if (news.Tags.Count > 0)
-            {
-                <i> in @string.Join(" ,", news.Tags.Select(t => t.Name).ToList())</i>
-            }
+    <article class="col-md-8">
+        <h2>Latest news</h2>
+        @foreach (var news in Model.LatestNews)
+        {
+            <div class="col-md-5 news">
+                <h2><a href="@Url.Action("Details", "News", new { id = news.Id })">@news.Title</a></h2>
+                <p>@TextManipulation.ShortenText(news.Body, 50)</p>
+                <div>
+                    posted @news.Date.ToShortDateString()
+                    @if (news.Tags.Count > 0)
+                {
+                        <i> in @string.Join(" ,", news.Tags.Select(t => t.Name).ToList())</i>
+                    }
+                </div>
             </div>
-        </article>
-    }
-   
+        }
+    </article>
+    <article class="col-md-4">
+        <h2>Star to watch</h2>
+        <div class="player">
+            @{
+            string path = DefaultValues.PlayersPicsPath + Model.FeaturedPlayer.PicturePath;
+            }
+                <div>
+                    <img style="float:left; margin-right:10px;" src="@path" />
+                    <a href="@Url.Action("Details", "Players", new { id = Model.FeaturedPlayer.Id })">
+                        <h2 style="margin:0px">@Model.FeaturedPlayer.FullName</h2>
+                        <h2 style="margin:0px">"@Model.FeaturedPlayer.NickName"</h2>
+                    </a>
+                    <h4>@Model.FeaturedPlayer.PlayerClass</h4>
+                    <p style="overflow:hidden">@TextManipulation.ShortenText(Model.FeaturedPlayer.ProfessionalCareer)</p>
+                </div>
+        </div>
+    </article>
+</section>
+<section class="row">
+    <article class="col-md-8">
+        <h2>Featured tournament</h2>
+        <div class="tourn">
+            <h2><a href="@Url.Action("Details", "Tournaments", new { id = Model.FeaturedTournament.Id })">@Model.FeaturedTournament.Name</a></h2>
+            <div>@TextManipulation.ShortenText(Model.FeaturedTournament.Description, 50)</div>
+            <div> End date - @Model.FeaturedTournament.EndDate.ToShortDateString()</div>
+        </div>
+    </article>
+    <article class="col-md-4">
+        <h2>Latest article</h2>
+        <div class="artic">
+            <h2><a href="@Url.Action("Details", "Articles", new { id = Model.LastArticle.Id })">@Model.LastArticle.Title</a></h2>
+            <div>@TextManipulation.ShortenText(Model.LastArticle.Body, 50)</div>
+            <div> End date - @Model.LastArticle.Date.ToShortDateString()</div>
+        </div>
+    </article>
 </section>
