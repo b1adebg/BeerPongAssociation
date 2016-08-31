@@ -14,7 +14,7 @@
 <section class="row">
     @foreach (var article in Model)
     {
-        <article class="col-md-6">
+        <article class="col-md-6 artic">
             <h2><a href="@Url.Action("Details", "Articles", new { id = article.Id })">@article.Title</a></h2>
             <p>@TextManipulation.ShortenText(article.Body)</p>
             <div>

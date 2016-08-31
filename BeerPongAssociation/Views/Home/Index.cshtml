@@ -23,7 +23,7 @@
         <h2>Latest news</h2>
         @foreach (var news in Model.LatestNews)
         {
-            <div class="col-md-5 news">
+            <div class="col-md-5 news wrap">
                 <h2><a href="@Url.Action("Details", "News", new { id = news.Id })">@news.Title</a></h2>
                 <p>@TextManipulation.ShortenText(news.Body, 50)</p>
                 <div>
@@ -38,7 +38,7 @@
     </article>
     <article class="col-md-4">
         <h2>Star to watch</h2>
-        <div class="player">
+        <div class="player wrap">
             @{
             string path = DefaultValues.PlayersPicsPath + Model.FeaturedPlayer.PicturePath;
             }
@@ -57,7 +57,7 @@
 <section class="row">
     <article class="col-md-8">
         <h2>Featured tournament</h2>
-        <div class="tourn">
+        <div class="tourn wrap">
             <h2><a href="@Url.Action("Details", "Tournaments", new { id = Model.FeaturedTournament.Id })">@Model.FeaturedTournament.Name</a></h2>
             <div>@TextManipulation.ShortenText(Model.FeaturedTournament.Description, 50)</div>
             <div> End date - @Model.FeaturedTournament.EndDate.ToShortDateString()</div>
@@ -65,7 +65,7 @@
     </article>
     <article class="col-md-4">
         <h2>Latest article</h2>
-        <div class="artic">
+        <div class="artic wrap">
             <h2><a href="@Url.Action("Details", "Articles", new { id = Model.LastArticle.Id })">@Model.LastArticle.Title</a></h2>
             <div>@TextManipulation.ShortenText(Model.LastArticle.Body, 50)</div>
             <div> End date - @Model.LastArticle.Date.ToShortDateString()</div>

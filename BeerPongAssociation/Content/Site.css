@@ -36,11 +36,23 @@ textarea {
     background-color: #d2ecff;
     border: 2px solid #656565;
     border-radius: 15px;
-    margin: 10px;
+    margin: 10px 20px;
     padding: 10px;
 }
 
 .news>h2 {
+    margin:1px;
+}
+
+.news-feat{
+    background-color: #d2ecff;
+    border: 2px solid #656565;
+    border-radius: 15px;
+    margin: 10px 20px;
+    padding: 10px;
+}
+
+.news-feat>h2 {
     margin:1px;
 }
 
@@ -60,6 +72,7 @@ textarea {
     border: 2px solid #656565;
     border-radius: 5px;
     padding: 10px;
+    margin-right:5px;
 }
 
 .tourn>h2 {
@@ -74,3 +87,9 @@ textarea {
     height:220px;
 }
 
+.wrap {
+    text-overflow: clip;
+    word-wrap: break-word;
+    overflow:hidden;
+}
+ 

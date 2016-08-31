@@ -10,7 +10,7 @@
 <section class="row">
     @foreach (var tour in Model.Where(t => (t.StartDate < DateTime.Now && t.EndDate > DateTime.Now)))
     {
-        <article class="col-md-6">
+        <article class="col-md-6 tourn">
             <h2><a href="@Url.Action("Details", "Tournaments", new { id = tour.Id })">@tour.Name</a></h2>
             <div>@TextManipulation.ShortenText(tour.Description, 50)</div>
             <div> Ending - @tour.EndDate.ToShortDateString()</div>
@@ -22,7 +22,7 @@
 <section class="row">
     @foreach (var tour in Model.Where(t => t.StartDate > DateTime.Now))
     {
-        <article class="col-md-6">
+        <article class="col-md-6 tourn">
             <h2><a href="@Url.Action("Details", "Tournaments", new { id = tour.Id })">@tour.Name</a></h2>
             <div>@TextManipulation.ShortenText(tour.Description, 50)</div>
             <div> Starting - @tour.StartDate.ToShortDateString()</div>
@@ -34,7 +34,7 @@
 <section class="row">
     @foreach (var tour in Model.Where(t => t.EndDate < DateTime.Now))
     {
-        <article class="col-md-6">
+        <article class="col-md-6 tourn">
             <h2><a href="@Url.Action("Details", "Tournaments", new { id = tour.Id })">@tour.Name</a></h2>
             <div>@TextManipulation.ShortenText(tour.Description, 50)</div>
             <div> Ended - @tour.EndDate.ToShortDateString()</div>

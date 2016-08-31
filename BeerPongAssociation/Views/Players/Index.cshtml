@@ -15,7 +15,7 @@
     {
         string path = DefaultValues.PlayersPicsPath + player.PicturePath;
         <article style="padding-right:0px" class="col-md-4">
-            <div class="player">
+            <div class="player wrap">
                 <img style="float:left; margin-right:10px;" src="@path" />
                 
                 <a href="@Url.Action("Details", "Players", new { id = player.Id })">
@@ -34,7 +34,7 @@
     {
         string path = DefaultValues.PlayersPicsPath + player.PicturePath;
         <article style="padding-right:0px" class="col-md-4">
-            <div class="player">
+            <div class="player wrap">
                 <img style="float:left; margin-right:10px;" src="@path" />
 
                 <a href="@Url.Action("Details", "Players", new { id = player.Id })">
