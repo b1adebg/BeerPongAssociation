@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BeerPongAssociation.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BeerPongAssociation.Controllers
 {
@@ -51,16 +52,20 @@ namespace BeerPongAssociation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Body,Date")] Article article)
+        public ActionResult Create([Bind(Include = "Id,Title,Body")] Article article)
         {
+            string currentUserId = User.Identity.GetUserId();
+            article.Author = db.Users.FirstOrDefault(x => x.Id == currentUserId);
             if (ModelState.IsValid)
             {
                 db.Articles.Add(article);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(article);
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
         // GET: Articles/Edit/5
@@ -83,7 +88,7 @@ namespace BeerPongAssociation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Text,Body,Date")] Article article)
+        public ActionResult Edit([Bind(Include = "Id,Title,Body")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +96,10 @@ namespace BeerPongAssociation.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(article);
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
         // GET: Articles/Delete/5
@@ -118,6 +126,11 @@ namespace BeerPongAssociation.Controllers
             db.Articles.Remove(article);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Error()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)

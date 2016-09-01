@@ -26,7 +26,6 @@ namespace BeerPongAssociation.Models
         [Required]
         public DateTime Date { get; set; }
 
-        [Required]
         public ApplicationUser Author { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }

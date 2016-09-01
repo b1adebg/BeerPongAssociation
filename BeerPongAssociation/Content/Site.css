@@ -23,43 +23,73 @@ textarea {
     max-width: 280px;
 }
 
+.home-article {
+    padding-left:1px;
+    padding-right:5px;
+}
+
+.home-title {
+    border: 1px solid #000000;
+    background-color:#d8d8d8;
+    border-radius: 2px;
+    padding:1px;
+    text-align:center;
+}
+
 .welcome {
     padding: 1px;
     background-color:#d8d8d8;
     border: 1px solid #000000;
-    border-radius: 5px;
+    border-radius: 2px;
     padding:5px;
     margin:5px;
 }
 
 .news {
-    background-color: #d2ecff;
-    border: 2px solid #656565;
-    border-radius: 15px;
+    background-color: #f3faff;
+    border: 1px solid #000000;
+    border-radius: 2px;
     margin: 10px 5px;
     padding: 10px;
 }
 
 .news>h2 {
     margin:1px;
+    height:2em;
+    line-height:1em;
 
 }
 
+.news>p {
+    height:2em;
+    line-height:1em;
+    margin-bottom:1px;
+}
+
 .artic {
-    background-color: #fce97e;
-    border: 2px solid #656565;
-    border-radius: 5px;
+    background-color: #fff6c6;
+    border: 1px solid #000000;
+    border-radius: 2px;
     padding: 10px;
 }
 
 .artic>h2 {
     margin:1px;
+    height:2em;
+    line-height:1em;
+}
+
+.artic>p {
+    margin:1px;
+    height:2em;
+    line-height:1em;
+
 }
 
 .tourn {
-    background-color: #f2a08e;
-    border: 2px solid #656565;
-    border-radius: 5px;
+    background-color: #ffe1cb;
+    border: 1px solid #000000;
+    border-radius: 2px;
     padding: 10px;
     margin-right:5px;
 }
@@ -69,9 +99,9 @@ textarea {
 }
 
 .player {
-    background-color: #9eff75;
-    border: 2px solid #656565;
-    border-radius: 5px;
+    background-color: #cdffb7;
+    border: 1px solid #000000;
+    border-radius: 2px;
     padding: 10px;
     height:220px;
 }

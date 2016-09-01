@@ -15,9 +15,9 @@
     @foreach (var news in Model.OrderByDescending(n => n.Date))
     {
         <article class="col-md-4">
-            <div class="news">
+            <div class="news wrap">
                 <h2><a href="@Url.Action("Details", "News", new { id = news.Id })">@news.Title</a></h2>
-                <p>@TextManipulation.ShortenText(news.Body, 50)</p>
+                <p class="wrap">@TextManipulation.ShortenText(news.Body)</p>
                 <div>
                     posted @news.Date.ToShortDateString()
                     @if (news.Tags.Count > 0)
