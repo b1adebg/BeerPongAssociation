@@ -23,17 +23,19 @@
         <h2>Latest news</h2>
         @foreach (var news in Model.LatestNews)
         {
-            <div class="col-md-5 news wrap">
-                <h2><a href="@Url.Action("Details", "News", new { id = news.Id })">@news.Title</a></h2>
-                <p>@TextManipulation.ShortenText(news.Body, 50)</p>
-                <div>
-                    posted @news.Date.ToShortDateString()
-                    @if (news.Tags.Count > 0)
+            <article class="col-md-6">
+                <div class="news wrap">
+                    <h2><a href="@Url.Action("Details", "News", new { id = news.Id })">@news.Title</a></h2>
+                    <p>@TextManipulation.ShortenText(news.Body, 50)</p>
+                    <div>
+                        posted @news.Date.ToShortDateString()
+                        @if (news.Tags.Count > 0)
                 {
-                        <i> in @string.Join(" ,", news.Tags.Select(t => t.Name).ToList())</i>
-                    }
+                            <i> in @string.Join(" ,", news.Tags.Select(t => t.Name).ToList())</i>
+                        }
+                    </div>
                 </div>
-            </div>
+            </article>
         }
     </article>
     <article class="col-md-4">

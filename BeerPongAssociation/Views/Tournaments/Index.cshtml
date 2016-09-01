@@ -10,10 +10,12 @@
 <section class="row">
     @foreach (var tour in Model.Where(t => (t.StartDate < DateTime.Now && t.EndDate > DateTime.Now)))
     {
-        <article class="col-md-6 tourn">
-            <h2><a href="@Url.Action("Details", "Tournaments", new { id = tour.Id })">@tour.Name</a></h2>
-            <div>@TextManipulation.ShortenText(tour.Description, 50)</div>
-            <div> Ending - @tour.EndDate.ToShortDateString()</div>
+        <article class="col-md-6">
+            <div class="tourn">
+                <h2><a href="@Url.Action("Details", "Tournaments", new { id = tour.Id })">@tour.Name</a></h2>
+                <div>@TextManipulation.ShortenText(tour.Description, 50)</div>
+                <div> Ending - @tour.EndDate.ToShortDateString()</div>
+            </div>
         </article>
     }
 </section>
@@ -22,22 +24,26 @@
 <section class="row">
     @foreach (var tour in Model.Where(t => t.StartDate > DateTime.Now))
     {
-        <article class="col-md-6 tourn">
-            <h2><a href="@Url.Action("Details", "Tournaments", new { id = tour.Id })">@tour.Name</a></h2>
-            <div>@TextManipulation.ShortenText(tour.Description, 50)</div>
-            <div> Starting - @tour.StartDate.ToShortDateString()</div>
-        </article>
+        <article class="col-md-6">
+            <div class="tourn">
+                <h2><a href="@Url.Action("Details", "Tournaments", new { id = tour.Id })">@tour.Name</a></h2>
+                <div>@TextManipulation.ShortenText(tour.Description, 50)</div>
+                <div> Starting - @tour.StartDate.ToShortDateString()</div>
+            </div>
+</article>
     }
 </section>
 
 <h2>Finished Tournaments</h2>
 <section class="row">
-    @foreach (var tour in Model.Where(t => t.EndDate < DateTime.Now))
+    @foreach (var tour in Model.Where(t => t.EndDate < DateTime.Now).Take(2))
     {
-        <article class="col-md-6 tourn">
-            <h2><a href="@Url.Action("Details", "Tournaments", new { id = tour.Id })">@tour.Name</a></h2>
-            <div>@TextManipulation.ShortenText(tour.Description, 50)</div>
-            <div> Ended - @tour.EndDate.ToShortDateString()</div>
+        <article class="col-md-6">
+            <div class="tourn">
+                <h2><a href="@Url.Action("Details", "Tournaments", new { id = tour.Id })">@tour.Name</a></h2>
+                <div>@TextManipulation.ShortenText(tour.Description, 50)</div>
+                <div> Ended - @tour.EndDate.ToShortDateString()</div>
+            </div>
         </article>
     }
 </section>

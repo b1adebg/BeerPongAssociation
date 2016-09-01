@@ -6,23 +6,34 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Latest articles</h2>
 
-<p>
-    @Html.ActionLink("Browse articles", "Browse")
-</p>
-<section class="row">
-    @foreach (var article in Model)
+
+<p class="nav-panel">
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Browse", "Articles")'">View all</button>
+    @if (ViewContext.HttpContext.User.IsInRole("Administrators") || ViewContext.HttpContext.User.IsInRole("Contributors"))
     {
-        <article class="col-md-6 artic">
-            <h2><a href="@Url.Action("Details", "Articles", new { id = article.Id })">@article.Title</a></h2>
-            <p>@TextManipulation.ShortenText(article.Body)</p>
-            <div>
-                posted @article.Date.ToShortDateString()
-                @if (article.Tags.Count > 0)
-                {
-                    <i> in @string.Join(" ,", article.Tags.Select(t => t.Name).ToList())</i>
-                }
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Articles")'">Create new article</button>
+    }
+</p>
+<h2>Latest articles</h2>
+<section class="row">
+    @foreach (var article in Model.OrderByDescending(a => a.Date))
+    {
+        <article class="col-md-6">
+            <div class="artic">
+                <h2><a href="@Url.Action("Details", "Articles", new { id = article.Id })">@article.Title</a></h2>
+                <p>@TextManipulation.ShortenText(article.Body)</p>
+                <div>
+                    posted @article.Date.ToShortDateString()
+                    @if (article.Tags.Count > 0)
+                    {
+                        <i> in @string.Join(" ,", article.Tags.Select(t => t.Name).ToList())</i>
+                    }
+                    else
+                    {
+                        <i> in general </i>
+                    }
+                </div>
             </div>
         </article>
     }

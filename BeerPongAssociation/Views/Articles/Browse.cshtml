@@ -4,7 +4,10 @@
     ViewBag.Title = "Browse";
 }
 
-<h2>Index</h2>
+<p class="nav-pane">
+    
+</p>
+<h2>Articles table</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -35,9 +38,12 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @if (ViewContext.HttpContext.User.IsInRole("Administrators"))
+            {
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Edit", "Articles", new { id=item.Id })'">Edit</button>
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Articles", new { id=item.Id })'">Delete</button>
+            }
+            <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Details", "Articles", new { id=item.Id })'">Details</button>
         </td>
     </tr>
 }
