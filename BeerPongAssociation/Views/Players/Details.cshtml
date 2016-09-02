@@ -108,7 +108,11 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+<p style="margin-top:15px">
+    @if (ViewContext.HttpContext.User.IsInRole("Administrators"))
+    {
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Edit", "Players", new { id = Model.Id })'">Edit</button>
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Players", new { id = Model.Id })'">Delete</button>
+    }
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Browse", "Players")'">Go to Players database</button>
 </p>

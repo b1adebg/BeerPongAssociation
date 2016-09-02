@@ -4,7 +4,7 @@
     ViewBag.Title = "Browse";
 }
 <p class="nav-pane">
-    @if (ViewContext.HttpContext.User.IsInRole("Administrators") || ViewContext.HttpContext.User.IsInRole("Contributors"))
+    @if (ViewContext.HttpContext.User.IsInRole("Administrators"))
     {
         <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Tournaments")'">Create new Tournament</button>
     }
