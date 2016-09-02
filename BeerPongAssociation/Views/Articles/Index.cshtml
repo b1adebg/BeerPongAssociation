@@ -20,9 +20,9 @@
     @foreach (var article in Model.OrderByDescending(a => a.Date))
     {
         <article class="col-md-6">
-            <div class="artic">
+            <div class="artic wrap">
                 <h2><a href="@Url.Action("Details", "Articles", new { id = article.Id })">@article.Title</a></h2>
-                <p>@TextManipulation.ShortenText(article.Body)</p>
+                <p class="wrap">@TextManipulation.ShortenText(article.Body)</p>
                 <div>
                     posted @article.Date.ToShortDateString()
                     @if (article.Tags.Count > 0)

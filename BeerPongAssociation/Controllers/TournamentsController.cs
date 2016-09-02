@@ -22,7 +22,7 @@ namespace BeerPongAssociation.Controllers
 
         public ActionResult Browse()
         {
-            return View(db.Tournaments.ToList());
+            return View(db.Tournaments.OrderByDescending(t => t.StartDate).ToList());
         }
 
         // GET: Tournaments/Details/5
@@ -41,6 +41,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: Tournaments/Create
+        [Authorize(Roles = "Administrators")]
         public ActionResult Create()
         {
             return View();
@@ -50,8 +51,9 @@ namespace BeerPongAssociation.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,StartDate,EndDate,Location")] Tournament tournament)
+        public ActionResult Create([Bind(Include = "Id,Name,StartDate,EndDate,Location,Description")] Tournament tournament)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +66,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: Tournaments/Edit/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,6 +85,7 @@ namespace BeerPongAssociation.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,StartDate,EndDate,Location")] Tournament tournament)
         {
@@ -95,6 +99,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: Tournaments/Delete/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,6 +116,7 @@ namespace BeerPongAssociation.Controllers
 
         // POST: Tournaments/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

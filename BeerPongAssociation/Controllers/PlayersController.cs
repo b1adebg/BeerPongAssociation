@@ -17,12 +17,12 @@ namespace BeerPongAssociation.Controllers
         // GET: Players
         public ActionResult Index()
         {
-            return View(db.Players.ToList());
+            return View(db.Players.OrderByDescending(p => p.Popularity).Take(6).ToList());
         }
 
         public ActionResult Browse()
         {
-            return View(db.Players.ToList());
+            return View(db.Players.OrderByDescending(p => p.FullName).ToList());
         }
 
         // GET: Players/Details/5
@@ -41,6 +41,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: Players/Create
+        [Authorize(Roles = "Administrators")]
         public ActionResult Create()
         {
             return View();
@@ -50,6 +51,7 @@ namespace BeerPongAssociation.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FullName,NickName,PlayerClass,LeftHandPrecision,RightHandPrecision,Stamina,Mentality,BestResult,ProfessionalCareer,PersonalIfno,Popularity,PicturePath")] Player player)
         {
@@ -64,6 +66,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: Players/Edit/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,6 +85,7 @@ namespace BeerPongAssociation.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FullName,NickName,PlayerClass,LeftHandPrecision,RightHandPrecision,Stamina,Mentality,BestResult,ProfessionalCareer,PersonalIfno,Popularity,PicturePath")] Player player)
         {
@@ -95,6 +99,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: Players/Delete/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,6 +116,7 @@ namespace BeerPongAssociation.Controllers
 
         // POST: Players/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Administrators")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

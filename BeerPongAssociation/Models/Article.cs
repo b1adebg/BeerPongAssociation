@@ -21,12 +21,13 @@ namespace BeerPongAssociation.Models
         public string Title { get; set; }
 
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Body { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
 
-        public ApplicationUser Author { get; set; }
+        public virtual ApplicationUser Author { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }
 

@@ -30,6 +30,9 @@ namespace BeerPongAssociation.Migrations
                 CreateUser(context, "geshu@gmail.com", "123", "George Petrov");
 
                 CreateRole(context, "Administrators");
+                CreateRole(context, "Contributors");
+                CreateRole(context, "ProPlayers");
+
                 AddUserToRole(context, "admin@gmail.com", "Administrators");
 
                 /*

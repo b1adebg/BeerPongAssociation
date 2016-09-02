@@ -20,6 +20,8 @@ namespace BeerPongAssociation.Models
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<Article> Articles { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -31,6 +33,5 @@ namespace BeerPongAssociation.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<BeerPongAssociation.Models.Article> Articles { get; set; }
     }
 }

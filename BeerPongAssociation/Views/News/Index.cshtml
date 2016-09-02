@@ -6,11 +6,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Latest news</h2>
-
-<p>
-    @Html.ActionLink("Browse news", "Browse")
+<p class="nav-panel">
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Browse", "News")'">View all</button>
+    @if (ViewContext.HttpContext.User.IsInRole("Administrators") || ViewContext.HttpContext.User.IsInRole("Contributors"))
+    {
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "News")'">Create a news</button>
+    }
 </p>
+<h2>Latest news</h2>
 <section class="row">
     @foreach (var news in Model.OrderByDescending(n => n.Date))
     {

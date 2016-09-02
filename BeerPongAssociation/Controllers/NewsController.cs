@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BeerPongAssociation.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BeerPongAssociation.Controllers
 {
@@ -13,14 +14,14 @@ namespace BeerPongAssociation.Controllers
         // GET: News
         public ActionResult Index()
         {
-            var news = db.SiteNews.OrderByDescending(n => n.Date);
+            var news = db.SiteNews.OrderByDescending(n => n.Date).Take(12);
             return View(news.Include(n => n.Tags).ToList());
         }
 
         public ActionResult Browse()
         {
             var news = db.SiteNews.OrderByDescending(n => n.Date);
-            return View(news.ToList());
+            return View(news.Include(a => a.Author).ToList());
         }
 
         // GET: News/Details/5
@@ -39,7 +40,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: News/Create
-        [Authorize(Roles = "Administrators")]
+        [Authorize(Roles = "Administrators, Contributors")]
         public ActionResult Create()
         {
             return View();
@@ -49,10 +50,13 @@ namespace BeerPongAssociation.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Administrators")]
+        [Authorize(Roles = "Administrators, Contributors")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Body,Date")] News news)
+        public ActionResult Create([Bind(Include = "Id,Title,Body")] News news)
         {
+            string currentUserId = User.Identity.GetUserId();
+            news.Author = db.Users.Find(currentUserId);
+
             if (ModelState.IsValid)
             {
                 db.SiteNews.Add(news);
@@ -64,7 +68,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: News/Edit/5
-        [Authorize(Roles = "Administrators")]
+        [Authorize(Roles = "Administrators, Contributors")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,7 +87,7 @@ namespace BeerPongAssociation.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Administrators")]
+        [Authorize(Roles = "Administrators, Contributors")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Body")] News news)
         {

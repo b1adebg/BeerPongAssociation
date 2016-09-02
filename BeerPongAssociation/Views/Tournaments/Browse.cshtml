@@ -3,12 +3,14 @@
 @{
     ViewBag.Title = "Browse";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p class="nav-pane">
+    @if (ViewContext.HttpContext.User.IsInRole("Administrators") || ViewContext.HttpContext.User.IsInRole("Contributors"))
+    {
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Tournaments")'">Create new Tournament</button>
+    }
 </p>
+<h2>All tournaments</h2>
+
 <table class="table">
     <tr>
         <th>
@@ -22,6 +24,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th></th>
     </tr>
@@ -41,9 +46,15 @@
             @Html.DisplayFor(modelItem => item.Location)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @if (ViewContext.HttpContext.User.IsInRole("Administrators"))
+            {
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Tournaments", new { id=item.Id })'">Delete</button>
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Edit", "Tournaments", new { id=item.Id })'">Edit</button>
+            }
+            <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Details", "Tournaments", new { id=item.Id })'">Details</button>
         </td>
     </tr>
 }

@@ -1,17 +1,19 @@
-﻿@model IEnumerable<BeerPongAssociation.Models.Article>
+﻿@using Microsoft.AspNet.Identity;
+
+@model IEnumerable<BeerPongAssociation.Models.Article>
 
 @{
     ViewBag.Title = "Browse";
 }
 
 <p class="nav-pane">
-    
+    @if (ViewContext.HttpContext.User.IsInRole("Administrators") || ViewContext.HttpContext.User.IsInRole("Contributors"))
+    {
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Articles")'">Create new article</button>
+    }    
 </p>
 <h2>Articles table</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -38,9 +40,12 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @if (ViewContext.HttpContext.User.IsInRole("Administrators"))
+            @if (ViewContext.HttpContext.User.IsInRole("Administrators") || (item.Author != null && User.Identity.GetUserId() == item.Author.Id))
             {
                 <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Edit", "Articles", new { id=item.Id })'">Edit</button>
+            }
+            @if (ViewContext.HttpContext.User.IsInRole("Administrators"))
+            {
                 <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Articles", new { id=item.Id })'">Delete</button>
             }
             <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Details", "Articles", new { id=item.Id })'">Details</button>

@@ -18,12 +18,13 @@ namespace BeerPongAssociation.Controllers
         // GET: Articles
         public ActionResult Index()
         {
-            return View(db.Articles.OrderByDescending(a => a.Date).ToList());
+            return View(db.Articles.OrderByDescending(a => a.Date).Take(9).ToList());
         }
 
         public ActionResult Browse()
         {
-            return View(db.Articles.OrderByDescending(a => a.Date).ToList());
+            var articles = db.Articles.OrderByDescending(a => a.Date);
+            return View(articles.Include(a => a.Author).ToList());
         }
 
         // GET: Articles/Details/5
@@ -42,6 +43,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: Articles/Create
+        [Authorize(Roles = "Administrators, Contributors")]
         public ActionResult Create()
         {
             return View();
@@ -51,11 +53,12 @@ namespace BeerPongAssociation.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrators, Contributors")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Body")] Article article)
         {
             string currentUserId = User.Identity.GetUserId();
-            article.Author = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+            article.Author = db.Users.Find(currentUserId);
             if (ModelState.IsValid)
             {
                 db.Articles.Add(article);
@@ -69,6 +72,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: Articles/Edit/5
+        [Authorize(Roles = "Administrators, Contributors")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -87,6 +91,7 @@ namespace BeerPongAssociation.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrators, Contributors")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Body")] Article article)
         {
@@ -103,6 +108,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // GET: Articles/Delete/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,6 +124,7 @@ namespace BeerPongAssociation.Controllers
         }
 
         // POST: Articles/Delete/5
+        [Authorize(Roles = "Administrators")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

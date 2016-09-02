@@ -39,13 +39,16 @@ namespace BeerPongAssociation.Models
         public string BestResult { get; set; }
 
         [Required]
+        [DataType(DataType.MultilineText)]
         public string ProfessionalCareer { get; set; }
 
         [Required]
+        [DataType(DataType.MultilineText)]
         public string PersonalIfno { get; set; }
 
         public int Popularity { get; set; }
 
+        [Required]
         public string PicturePath { get; set; }
 
         public virtual ApplicationUser UserAccount { get; set; }

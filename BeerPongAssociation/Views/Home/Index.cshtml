@@ -30,7 +30,7 @@
                     <div>
                         posted @news.Date.ToShortDateString()
                         @if (news.Tags.Count > 0)
-                {
+                        {
                             <i> in @string.Join(" ,", news.Tags.Select(t => t.Name).ToList())</i>
                         }
                     </div>

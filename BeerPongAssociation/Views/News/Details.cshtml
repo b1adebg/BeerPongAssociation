@@ -1,42 +1,30 @@
-﻿@model BeerPongAssociation.Models.News
+﻿@using Microsoft.AspNet.Identity;
+
+@model BeerPongAssociation.Models.News
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>News</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-    </dl>
+<div class="news">
+    <h2 class="wrap">@Model.Title</h2>
+    @{
+        string author = Model.Author.FullName == null ? Model.Author.Email : Model.Author.FullName;
+        <h4 class="wrap">by @author on @Model.Date.ToShortDateString()</h4>
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+<hr />
+<div class="news big-form">
+    @Model.Body
+</div>
+<p style="margin-top:15px">
+    @if (ViewContext.HttpContext.User.IsInRole("Administrators"))
+    {
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "News", new { id = Model.Id })'">Delete</button>
+    }
+    @if (ViewContext.HttpContext.User.IsInRole("Administrators") || (Model.Author != null && User.Identity.GetUserId() == Model.Author.Id))
+    {
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Edit", "News", new { id = Model.Id })'">Edit</button>
+    }
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Browse", "News")'">Go to News table</button>
 </p>

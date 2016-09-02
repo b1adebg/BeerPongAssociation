@@ -6,12 +6,16 @@
     ViewBag.Title = "Index";
 }
 
-<p>
-    @Html.ActionLink("Browse players", "Browse")
+<p class="nav-panel">
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Browse", "Players")'">View all</button>
+    @if (ViewContext.HttpContext.User.IsInRole("Administrators"))
+    {
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "PLayers")'">Add new Pro Player</button>
+    }
 </p>
 <section class="row">
     <h2>Popular players</h2>
-    @foreach (var player in Model.OrderByDescending(p => p.Popularity).Take(3))
+    @foreach (var player in Model)
     {
         string path = DefaultValues.PlayersPicsPath + player.PicturePath;
         <article style="padding-right:0px" class="col-md-4">
@@ -28,22 +32,4 @@
         </article>
     }
 </section>
-<section class="row">
-    <h2>Players database</h2>
-    @foreach (var player in Model.OrderBy(p => p.FullName))
-    {
-        string path = DefaultValues.PlayersPicsPath + player.PicturePath;
-        <article style="padding-right:0px" class="col-md-4">
-            <div class="player wrap">
-                <img style="float:left; margin-right:10px;" src="@path" />
 
-                <a href="@Url.Action("Details", "Players", new { id = player.Id })">
-                    <h2 style="margin:0px">@player.FullName</h2>
-                    <h2 style="margin:0px">"@player.NickName"</h2>
-                </a>
-                <h4>@player.PlayerClass</h4>
-                <p style="overflow:hidden">@TextManipulation.ShortenText(player.ProfessionalCareer)</p>
-            </div>
-        </article>
-    }
-</section>
